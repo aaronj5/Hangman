@@ -25,3 +25,8 @@ while not done:
     for letter in word:
         if letter.lower() not in guesses:
             done = False
+
+if done: #End of game prompts
+    print(f"Congratulations, you have found the word, {word} ! ")
+else:
+    print(f"Gave Over :( The word was {word} ! ")
