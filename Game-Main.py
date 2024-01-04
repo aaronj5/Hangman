@@ -1,4 +1,9 @@
-word = "coding"  #Word for player to guess
+import random
+
+with open('hangman.txt', 'r') as f: #randoms guessing words from the provided list in hangman.txt
+    words = f.readlines()
+
+word = random.choice(words)[:-1]  #Word for player to guess
 
 allowed_errors = 8 
 guesses = []
