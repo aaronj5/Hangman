@@ -1,9 +1,9 @@
 import random
 
-with open('hangman.txt', 'r') as f: #randoms guessing words from the provided list in hangman.txt
+with open('hangman.txt', 'r') as f: #opens a file of specific words for the game to pick from (educational related)
     words = f.readlines()
 
-word = random.choice(words)[:-1]  #Word for player to guess
+word = random.choice(words).strip()
 
 allowed_errors = 8 
 guesses = []
@@ -11,27 +11,32 @@ done = False
 
 while not done:
     for letter in word:
-        if letter.lower() in guesses: #Ignores case sensitivity
+        if letter.lower() in guesses:
             print(letter, end=" ")
-
         else:
-            print("_", end = " ")
+            print("_", end=" ")
     print("")
 
+    guess = input(f"Allowed Errors Left {allowed_errors}, Next Guess?:").lower().strip()
 
-    guess = input(f"Allowed Errors Left {allowed_errors}, Next Guess?:") #Notifys player how many guess they have
-    guesses.append(guess.lower())
-    if guess.lower () not in word.lower():
-        allowed_errors -= 1 #subtract amount of guesses left
-        if allowed_errors == 0: #Amount of guesses remain
+    
+    if not guess.isalpha() or len(guess) != 1: #Verifies if input is a valid character, and blocks numbers
+        print("Please enter a valid single letter.")
+        continue
+
+    
+    if guess not in word.lower(): # Check if the guessed letter is not in the word
+        allowed_errors -= 1
+        if allowed_errors == 0:
             break
 
-    done = True
-    for letter in word:
-        if letter.lower() not in guesses:
-            done = False
+    done = all(letter.lower() in guesses for letter in word)
 
-if done: #End of game prompts
-    print(f"Congratulations, you have found the word, {word} ! ")
+  
+    if guess not in guesses:
+        guesses.append(guess)
+
+if done: #end game message, win or lose
+    print(f"Congratulations, you have found the word: {word}!")
 else:
-    print(f"Gave Over :( The word was {word} ! ")
+    print(f"Game Over :( The word was: {word}!")
