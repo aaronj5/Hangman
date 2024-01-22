@@ -17,6 +17,8 @@ while not done:
             print("_", end=" ")
     print("")
 
+    print("Letters guessed:", ", ".join(guesses)) #View letters already guessed to prevent confusion
+
     guess = input(f"Allowed Errors Left {allowed_errors}, Next Guess?:").lower().strip()
 
     
