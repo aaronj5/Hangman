@@ -20,10 +20,12 @@ while not done:
     guess = input(f"Allowed Errors Left {allowed_errors}, Next Guess?:").lower().strip()
 
     
-    if not guess.isalpha() or len(guess) != 1: #Verifies if input is a valid character, and blocks numbers
-        print("Please enter a valid single letter.")
+    if not guess.isalpha(): #Verifies if input is a valid character, and blocks numbers
+        print("Please enter a valid letter.")
         continue
-
+    if len(guess) != 1:
+        print("Please only input one letter")
+        continue    
     
     if guess not in word.lower(): # Check if the guessed letter is not in the word
         allowed_errors -= 1
