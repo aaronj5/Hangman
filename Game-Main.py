@@ -17,8 +17,8 @@ while not done:
             print("_", end=" ")
     print("")
 
-    guess = input(f"Allowed Errors Left {allowed_errors}, Next Guess?:").lower().strip()
-
+    guess = input(f"Allowed Errors Left {allowed_errors}, Next Guess?:").lower().strip() #
+    print("Letters guessed:", ", ".join(guesses)) #View letters already guessed to prevent confusion
     
     if not guess.isalpha(): #Verifies if input is a valid character, and blocks numbers
         print("Please enter a valid letter.")
